@@ -9,14 +9,13 @@ import org.testng.annotations.Test;
 import utils.SeleniumUtils;
 
 public class UserMgtTest extends BaseTest {
-    HomePage homePage;
-    UserMgtPage userMgtPage;
+   UserMgtPage userMgtPage;
 
     @BeforeMethod
     public void localSetUp() {
-        homePage = new HomePage(getDriver());
         userMgtPage = new UserMgtPage(getDriver());
     }
+
     @Test(testName = "Verify title of User-Mgt page")
     public void test01() {
         userMgtPage.click(userMgtPage.userMgtBtn);
