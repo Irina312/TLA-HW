@@ -5,17 +5,18 @@ import Pages.UserMgtPage;
 import base.BaseTest;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class UserDBTest extends BaseTest {
-    UserDBPage newUserPage;
+    UserDBPage userDBPage;
     UserMgtPage userMgtPage;
 
     @BeforeMethod
     public void localSetUp() {
-        newUserPage = new UserDBPage(getDriver());
+        userDBPage = new UserDBPage(getDriver());
     }
 
     @DataProvider(name = "Users info")
@@ -46,19 +47,30 @@ public class UserDBTest extends BaseTest {
     public void test01(String firstName, String lastName, String phoneNumber,
                        String email, String role) {
         userMgtPage.click(userMgtPage.userMgtBtn);
-        newUserPage.firstName.click();
-        newUserPage.firstName.sendKeys(firstName);
+        userDBPage.firstName.click();
+        userDBPage.firstName.sendKeys(firstName);
 
-        newUserPage.lastName.click();
-        newUserPage.lastName.sendKeys(lastName);
+        userDBPage.lastName.click();
+        userDBPage.lastName.sendKeys(lastName);
 
-        newUserPage.phoneNumber.click();
-        newUserPage.phoneNumber.sendKeys(phoneNumber);
+        userDBPage.phoneNumber.click();
+        userDBPage.phoneNumber.sendKeys(phoneNumber);
 
-        newUserPage.email.click();
-        newUserPage.email.sendKeys(email);
+        userDBPage.email.click();
+        userDBPage.email.sendKeys(email);
 
-        //newUserPage.roleSelect.sendKeys(role);
+        Select select = new Select(userDBPage.roleSelect);
+        select.selectByVisibleText(role);
+
+        userDBPage.submitBtn.click();
+    }
+    @Test(testName = "Verify the user was added to DB")
+    public void test02() {
+        userDBPage.submitTableBtn.click();
+        userMgtPage.accessDBBtn.click();
+
+        String expectedUser = "";
+        String actualUser = "";
 
 
     }

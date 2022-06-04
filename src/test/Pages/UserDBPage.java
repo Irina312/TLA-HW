@@ -32,6 +32,12 @@ public class UserDBPage extends BasePage {
     @FindBy(id = "Select-role")
     public WebElement roleSelect;
 
+    @FindBy(id = "submit-btn")
+    public WebElement submitBtn;
+
+    @FindBy(id = "submit-table-btn")
+    public WebElement submitTableBtn;
+
     @DataProvider(name = "Users info")
     public Object[][] testData2() {
         Object[][] data2 = new Object[3][5];
