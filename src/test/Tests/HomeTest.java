@@ -22,10 +22,10 @@ public class HomeTest extends BaseTest {
     public Object[][] testData1() {
         Object[][] data = new Object[7][2];
         data[0][0] = "php-travels";
-        data[1][1] = "Demo Script Test drive - PHPTRAVELS";
+        data[0][1] = "Demo Script Test drive - PHPTRAVELS";
 
         data[1][0] = "mercury-tours";
-        data[1][1] = "demoaut.com - demoaut Resources and Information.";
+        data[1][1] = "Demoaut.com";
 
         data[2][0] = "internet";
         data[2][1] = "The Internet";
@@ -34,13 +34,13 @@ public class HomeTest extends BaseTest {
         data[3][1] = "My Store";
 
         data[4][0] = "passion-tea-company";
-        data[4][1] = "www.practiceselenium.com";
+        data[4][1] = "";
 
         data[5][0] = "sauce-demo";
         data[5][1] = "Swag Labs";
 
         data[6][0] = "shopping-cart";
-        data[6][1] = "Typescript React Shopping Cart";
+        data[6][1] = "Typescript React Shopping cart";
 
         return data;
     }
