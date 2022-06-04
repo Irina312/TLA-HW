@@ -3,9 +3,8 @@ package Tests;
 import Pages.UserDBPage;
 import Pages.UserMgtPage;
 import base.BaseTest;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -46,7 +45,7 @@ public class UserDBTest extends BaseTest {
     @Test(testName = "New user", dataProvider = "Users info")
     public void test01(String firstName, String lastName, String phoneNumber,
                        String email, String role) {
-        userMgtPage.click(userMgtPage.userMgtBtn);
+        userMgtPage.userMgtBtn.click();
         userDBPage.firstName.click();
         userDBPage.firstName.sendKeys(firstName);
 
@@ -63,19 +62,14 @@ public class UserDBTest extends BaseTest {
         select.selectByVisibleText(role);
 
         userDBPage.submitBtn.click();
-    }
-    @Test(testName = "Verify the user was added to DB")
-    public void test02() {
         userDBPage.submitTableBtn.click();
         userMgtPage.accessDBBtn.click();
 
-        String expectedUser = "";
-        String actualUser = "";
-
+        Assert.assertTrue(userDBPage.lastUser.getText().contains(phoneNumber) &&
+                                  userDBPage.lastUser.getText().contains(email));
 
     }
 }
-
 
 // Add a new user to the User-Mgt page, Submit a table to add to the Database,
 // and verify the user was added to DB.
