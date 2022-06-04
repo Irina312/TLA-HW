@@ -2,8 +2,10 @@ package Tests;
 
 import Pages.HomePage;
 import base.BaseTest;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import utils.SeleniumUtils;
 
@@ -16,54 +18,40 @@ public class HomeTest extends BaseTest {
         homePage = new HomePage(getDriver());
     }
 
-    @Test(testName = "Verify PNP Travels link & page title")
-    public void test01() {
-        homePage.phpTravelsLink.click();
-        String actualTitle = SeleniumUtils.switchToWindowAndVerifyTitle(getDriver());
-        Assert.assertEquals(actualTitle, "Demo Script Test drive - PHPTRAVELS");
+    @DataProvider(name = "LinksTestData")
+    public Object[][] testData1() {
+        Object[][] data = new Object[7][2];
+        data[0][0] = "php-travels";
+        data[1][1] = "Demo Script Test drive - PHPTRAVELS";
+
+        data[1][0] = "mercury-tours";
+        data[1][1] = "demoaut.com - demoaut Resources and Information.";
+
+        data[2][0] = "internet";
+        data[2][1] = "The Internet";
+
+        data[3][0] = "e-commerce";
+        data[3][1] = "My Store";
+
+        data[4][0] = "passion-tea-company";
+        data[4][1] = "www.practiceselenium.com";
+
+        data[5][0] = "sauce-demo";
+        data[5][1] = "Swag Labs";
+
+        data[6][0] = "shopping-cart";
+        data[6][1] = "Typescript React Shopping Cart";
+
+        return data;
     }
 
-    @Test(testName = "Verify Mercury-Tours link & page title")
-    public void test02() {
-        homePage.click(homePage.mercuryToursLink);
+    @Test(dataProvider = "LinksTestData")
+    public void test01(String linkText, String expectedTitle) {
+        getDriver().findElement(By.id(linkText)).click();
         String actualTitle = SeleniumUtils.switchToWindowAndVerifyTitle(getDriver());
-        Assert.assertEquals(actualTitle, "newtours.demoaut.com");
+        Assert.assertEquals(actualTitle, expectedTitle);
     }
 
-    @Test(testName = "Verify Internet link & page title")
-    public void test03() {
-        homePage.internetLink.click();
-        String actualTitle = SeleniumUtils.switchToWindowAndVerifyTitle(getDriver());
-        Assert.assertEquals(actualTitle, "The Internet");
-    }
-
-    @Test(testName = "Verify eCommerce link & page title")
-    public void test04() {
-        homePage.click(homePage.ecommerceLink);
-        String actualTitle = SeleniumUtils.switchToWindowAndVerifyTitle(getDriver());
-        Assert.assertEquals(actualTitle, "My Store");
-    }
-
-    @Test(testName = "Verify Passion Tea Company link & page title")
-    public void test05() {
-        homePage.passionTeaCompanyLink.click();
-        String actualTitle = SeleniumUtils.switchToWindowAndVerifyTitle(getDriver());
-        Assert.assertEquals(actualTitle, "www.practiceselenium.com");
-    }
-
-    @Test(testName = "Verify Saucedemo link & page title")
-    public void test06() {
-        homePage.click(homePage.sauceDemoLink);
-        String actualTitle = SeleniumUtils.switchToWindowAndVerifyTitle(getDriver());
-        Assert.assertEquals(actualTitle, "Swag Labs");
-    }
-
-    @Test(testName = "Verify Saucedemo link & page title")
-    public void test07() {
-        homePage.shoppingCartLink.click();
-        String actualTitle = SeleniumUtils.switchToWindowAndVerifyTitle(getDriver());
-        Assert.assertEquals(actualTitle, "Typescript React Shopping Cart");
-    }
 }
 
 //  Verify all links on the homepage of the application are taken to the expected page
